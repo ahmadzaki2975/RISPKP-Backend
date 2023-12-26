@@ -16,7 +16,7 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.use("/users", require("./routes/userRoutes"));
+app.use("/users", require("./src/routes/userRoutes"));
 
 //! No Route Found Error
 app.use((req, res, next) => {
