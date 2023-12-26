@@ -1,8 +1,10 @@
 const User = require("../models/user").User;
 const express = require("express");
+const bcrypt = require("bcrypt");
+const CustomError = require("../errors/CustomError");
 
 const userController = express.Router();
-const CustomError = require("../errors/CustomError");
+const pepper = process.env.PEPPER;
 
 const getAllUsers = async (req, res) => {
   try {
@@ -23,7 +25,7 @@ const createUser = async (req, res) => {
     }
     const user = new User({
       username,
-      password,
+      password: await bcrypt.hash(password + pepper, 10),
     });
     await user.save();
     res.send(user);
