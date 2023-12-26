@@ -1,6 +1,7 @@
 const User = require("../models/user").User;
 const express = require("express");
 const bcrypt = require("bcrypt");
+const jsonwebtoken = require("jsonwebtoken");
 const CustomError = require("../errors/CustomError");
 
 const userController = express.Router();
@@ -18,7 +19,11 @@ const getAllUsers = async (req, res) => {
 }
 
 const createUser = async (req, res) => {
+  
   try {
+    if(!pepper) {
+      throw new CustomError("Pepper not found", 500);
+    }
     const { username, password } = req.body;
     if (!username || !password) {
       throw new CustomError("Username and password are required", 400);
