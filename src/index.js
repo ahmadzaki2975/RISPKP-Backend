@@ -1,9 +1,9 @@
-import express from "express";
-import dotenv from "dotenv";
-import mongoose from "mongoose";
-import morgan from "morgan";
-import bodyParser from "body-parser";
-import cors from "cors";
+const express = require("express");
+const dotenv = require("dotenv");
+const mongoose = require("mongoose");
+const morgan = require("morgan");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 
 dotenv.config();
 
@@ -15,6 +15,8 @@ app.use(bodyParser.json());
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
+
+app.use("/users", require("./routes/userRoutes"));
 
 //! No Route Found Error
 app.use((req, res, next) => {
