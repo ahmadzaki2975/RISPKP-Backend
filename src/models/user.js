@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema({
     unique: true,
   },
   password: String,
+  salt: String,
 });
 
 const User = mongoose.model("User", userSchema);
