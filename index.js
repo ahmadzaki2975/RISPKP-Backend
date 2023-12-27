@@ -13,7 +13,7 @@ app.use(morgan("dev"));
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.send("<h1 style='font-family:sans-serif'>e-RISPKP Backend</h1>");
 });
 
 app.use("/users", require("./src/routes/userRoutes"));
