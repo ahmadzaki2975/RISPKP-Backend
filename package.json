@@ -6,7 +6,7 @@
   "type": "commonjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node --watch index.js",
+    "dev": "nodemon index.js",
     "lint": "eslint ."
   },
   "repository": {
@@ -20,7 +20,8 @@
   },
   "homepage": "https://github.com/ahmadzaki2975/RISPKP-Backend#readme",
   "devDependencies": {
-    "eslint": "^8.56.0"
+    "eslint": "^8.56.0",
+    "nodemon": "^3.0.2"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
