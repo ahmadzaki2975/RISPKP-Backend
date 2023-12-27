@@ -30,6 +30,7 @@ try {
   if (!process.env.MONGO_URI) {
     throw new Error("Database URI can't be found");
   }
+  console.log(process.env.MONGO_URI);
   mongoose.connect(process.env.MONGO_URI);
   mongoose.connection.once("open", () => {
     console.log("Connected to database");
