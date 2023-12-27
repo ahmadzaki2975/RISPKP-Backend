@@ -8,7 +8,7 @@ const cors = require("cors");
 dotenv.config();
 
 const app = express();
-app.use(cors());
+app.use(cors({ origin: "*" }));
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 
@@ -30,7 +30,6 @@ try {
   if (!process.env.MONGO_URI) {
     throw new Error("Database URI can't be found");
   }
-  console.log(process.env.MONGO_URI);
   mongoose.connect(process.env.MONGO_URI);
   mongoose.connection.once("open", () => {
     console.log("Connected to database");
