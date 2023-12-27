@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
 app.use("/users", require("./src/routes/userRoutes"));
 
 //! No Route Found Error
-app.use((req, res, next) => {
+app.use((req, res) => {
   res.status(404).send({
     message: "Route not found",
   });

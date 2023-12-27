@@ -1,5 +1,4 @@
 const User = require("../models/user").User;
-const express = require("express");
 const bcrypt = require("bcrypt");
 const jsonwebtoken = require("jsonwebtoken");
 const CustomError = require("../errors/CustomError");
