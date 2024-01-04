@@ -69,7 +69,7 @@ const login = async (req, res) => {
     res
       .cookie("token", token, {
         maxAge: 8 * 60 * 60 * 1000,
-        domain: process.env.NODE_ENV === "dev" ? "localhost" : "e-rispkp.vercel.app",
+        domain: process.env.NODE_ENV === "dev" ? "localhost" : ".vercel.app",
       })
       .status(200)
       .send({
