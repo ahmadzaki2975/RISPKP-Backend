@@ -52,10 +52,7 @@ const login = async (req, res) => {
       throw new CustomError("User not found", 404);
     }
 
-    const isPasswordCorrect = await bcrypt.compare(
-      password,
-      user.password
-    );
+    const isPasswordCorrect = await bcrypt.compare(password, user.password);
     if (!isPasswordCorrect) {
       throw new CustomError("Wrong password", 401);
     }
@@ -70,7 +67,10 @@ const login = async (req, res) => {
     );
 
     res
-      .cookie("token", token, { maxAge: 8 * 60 * 60 * 1000, domain: "localhost" })
+      .cookie("token", token, {
+        maxAge: 8 * 60 * 60 * 1000,
+        domain: process.env.NODE_ENV === "dev" ? "localhost" : "e-rispkp.vercel.app",
+      })
       .status(200)
       .send({
         message: "Login successful",
@@ -87,9 +87,27 @@ const login = async (req, res) => {
 };
 
 const getUserData = async (req, res) => {
-  // const { token } = req.cookies;
-  console.log(res.cookie);
-  res.send("test");
+  const token = req.cookies.token;
+
+  try {
+    const decoded = jsonwebtoken.verify(token, process.env.JWT_SECRET);
+    const user = await User.findById(decoded.id);
+    if (!user) {
+      throw new CustomError("User not found", 404);
+    }
+    res.send({
+      username: user.username,
+      role: user.role,
+    });
+  } catch (error) {
+    console.log(error.message);
+    if (error instanceof CustomError) {
+      return res.status(error.status).send(error.toResponse());
+    }
+    res.status(500).send({
+      message: error.message,
+    });
+  }
 };
 
 module.exports = {
