@@ -70,7 +70,7 @@ const login = async (req, res) => {
     );
 
     res
-      .cookie("token", token, { maxAge: 8 * 3600000, domain: "localhost" })
+      .cookie("token", token, { maxAge: 8 * 60 * 60 * 1000, domain: "localhost" })
       .status(200)
       .send({
         message: "Login successful",
@@ -86,8 +86,15 @@ const login = async (req, res) => {
   }
 };
 
+const getUserData = async (req, res) => {
+  // const { token } = req.cookies;
+  console.log(res.cookie);
+  res.send("test");
+};
+
 module.exports = {
   getAllUsers,
   createUser,
   login,
+  getUserData,
 };
