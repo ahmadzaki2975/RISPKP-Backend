@@ -52,12 +52,14 @@ const login = async (req, res) => {
       throw new CustomError("User not found", 404);
     }
 
-    const combinedPassword = user.password + user.salt;
-    await bcrypt.compare(combinedPassword, password, (err) => {
-      if (err) {
-        throw new CustomError("Wrong password", 400);
-      }
-    });
+    const combinedPassword = password + user.salt;
+    const isPasswordCorrect = await bcrypt.compare(
+      combinedPassword,
+      user.password
+    );
+    if (!isPasswordCorrect) {
+      throw new CustomError("Wrong password", 401);
+    }
 
     const token = jsonwebtoken.sign(
       {

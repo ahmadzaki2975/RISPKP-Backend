@@ -39,7 +39,7 @@ try {
     console.error.bind(console, "connection error:")
   );
   app.listen(port, () => {
-    console.log("Example app listening on port " + port);
+    console.log("Server listening on port " + port);
   });
 } catch (error) {
   console.error(error.message);
