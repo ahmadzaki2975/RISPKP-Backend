@@ -70,8 +70,7 @@ const login = async (req, res) => {
     );
 
     res
-      .cookie("token", token, { maxAge: 8 * 3600000 })
-      .cookie("set-date", new Date().toISOString())
+      .cookie("token", token, { maxAge: 8 * 3600000, domain: "localhost" })
       .status(200)
       .send({
         message: "Login successful",
