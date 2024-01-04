@@ -52,9 +52,8 @@ const login = async (req, res) => {
       throw new CustomError("User not found", 404);
     }
 
-    const combinedPassword = password + user.salt;
     const isPasswordCorrect = await bcrypt.compare(
-      combinedPassword,
+      password,
       user.password
     );
     if (!isPasswordCorrect) {
