@@ -29,7 +29,6 @@ const createUser = async (req, res) => {
     await user.save();
     res.send(user);
   } catch (error) {
-    console.log(error.message);
     if (error instanceof CustomError) {
       return res.status(error.status).send(error.toResponse());
     }
@@ -80,7 +79,6 @@ const login = async (req, res) => {
         domain: process.env.NODE_ENV === "dev" ? undefined : ".vercel.app",
       });
   } catch (error) {
-    console.log(error.message);
     if (error instanceof CustomError) {
       return res.status(error.status).send(error.toResponse());
     }
@@ -115,7 +113,6 @@ const getUserData = async (req, res) => {
       role: user.role,
     });
   } catch (error) {
-    console.log(error.message);
     if (error instanceof CustomError) {
       return res.status(error.status).send(error.toResponse());
     }

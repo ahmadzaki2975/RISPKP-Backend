@@ -7,7 +7,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
 dotenv.config();
-
+/* eslint-disable no-console */
 const app = express();
 app.use(
   cors({

@@ -8,12 +8,9 @@ const authenticateAdmin = async (req, res, next) => {
     });
   }
   const token = req.cookies.token;
-  console.log(token);
 
   const decoded = jsonwebtoken.verify(token, process.env.JWT_SECRET);
-  console.log(decoded.id);
   const user = await User.findById(decoded.id);
-  console.log(user);
 
   if (!user) {
     return res.status(404).send({
@@ -37,10 +34,9 @@ const authenticateUser = async (req, res, next) => {
     });
   }
   const token = req.cookies.token;
-  console.log(token);
+  
   try {
     const decoded = jsonwebtoken.verify(token, process.env.JWT_SECRET);
-    console.log(decoded.id);
     const user = await User.findById(decoded.id);
     if (!user) {
       return res.status(404).send({
