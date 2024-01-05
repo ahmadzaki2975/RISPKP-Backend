@@ -90,6 +90,17 @@ const login = async (req, res) => {
   }
 };
 
+const logout = async (req, res) => {
+  res.cookie("token", "", {
+    maxAge: 0,
+    secure: process.env.NODE_ENV === "dev" ? false : true,
+    sameSite: process.env.NODE_ENV === "dev" ? "lax" : "none",
+  });
+  res.send({
+    message: "Logout successful",
+  });
+};
+
 const getUserData = async (req, res) => {
   const token = req.cookies.token;
 
@@ -118,5 +129,6 @@ module.exports = {
   getAllUsers,
   createUser,
   login,
+  logout, 
   getUserData,
 };
