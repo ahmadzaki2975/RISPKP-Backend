@@ -6,7 +6,14 @@ const CustomError = require("../errors/CustomError");
 const getAllUsers = async (req, res) => {
   try {
     const users = await User.find({});
-    res.send(users);
+    const filteredUsers = users.map((user) => {
+      return {
+        username: user.username,
+        role: user.role,
+        _id: user._id,
+      };
+    });
+    res.send(filteredUsers);
   } catch (error) {
     res.status(500).send({
       message: error.message,

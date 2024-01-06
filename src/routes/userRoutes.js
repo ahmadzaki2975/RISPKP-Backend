@@ -1,7 +1,16 @@
 const express = require("express");
 
-const { getAllUsers, createUser, login, getUserData, logout } = require("../controllers/userController");
-const {authenticateAdmin, authenticateUser} = require("../middlewares/authentication");
+const {
+  getAllUsers,
+  createUser,
+  login,
+  getUserData,
+  logout,
+} = require("../controllers/userController");
+const {
+  authenticateAdmin,
+  authenticateUser,
+} = require("../middlewares/authentication");
 
 const userRouter = express.Router();
 userRouter.get("/", authenticateAdmin, getAllUsers);
