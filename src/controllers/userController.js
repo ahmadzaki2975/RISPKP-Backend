@@ -48,6 +48,24 @@ const createUser = async (req, res) => {
   }
 };
 
+const deleteUser = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const user = await User.findByIdAndDelete(id);
+    if (!user) {
+      throw new CustomError("User not found", 404);
+    }
+    res.send(user);
+  } catch (error) {
+    if (error instanceof CustomError) {
+      return res.status(error.status).send(error.toResponse());
+    }
+    res.status(500).send({
+      message: error.message,
+    });
+  }
+};
+
 const login = async (req, res) => {
   const { username, password } = req.body;
 
@@ -135,6 +153,7 @@ const getUserData = async (req, res) => {
 module.exports = {
   getAllUsers,
   createUser,
+  deleteUser,
   login,
   logout, 
   getUserData,

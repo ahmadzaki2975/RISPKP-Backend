@@ -3,6 +3,7 @@ const express = require("express");
 const {
   getAllUsers,
   createUser,
+  deleteUser,
   login,
   getUserData,
   logout,
@@ -15,6 +16,7 @@ const {
 const userRouter = express.Router();
 userRouter.get("/", authenticateAdmin, getAllUsers);
 userRouter.post("/", createUser);
+userRouter.delete("/:id", authenticateAdmin, deleteUser);
 userRouter.post("/login", login);
 userRouter.post("/logout", logout);
 userRouter.get("/data", authenticateUser, getUserData);
