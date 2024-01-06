@@ -24,7 +24,6 @@ const getAllUsers = async (req, res) => {
 const createUser = async (req, res) => {
   const { username, password } = req.body;
   try {
-    console.log(req.body);
     if (!username || !password) {
       throw new CustomError("Username and password are required", 400);
     }
@@ -40,7 +39,6 @@ const createUser = async (req, res) => {
     if (error instanceof CustomError) {
       return res.status(error.status).send(error.toResponse());
     }
-    console.log(error);
     if(error.code === 11000) {
       return res.status(409).send(`User dengan username ${username} sudah terdaftar`);
     }
