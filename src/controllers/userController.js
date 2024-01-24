@@ -119,7 +119,7 @@ const login = async (req, res) => {
 const logout = async (req, res) => {
   res.cookie("token", "", {
     maxAge: 0,
-    secure: process.env.NODE_ENV === "dev" ? false : true,
+    secure: false,
     sameSite: process.env.NODE_ENV === "dev" ? "lax" : "none",
   });
   res.send({
